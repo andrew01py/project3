@@ -1,0 +1,157 @@
+/**
+ * MODERN CONTACT FORM WITH ANIMATIONS
+ * Demonstrates:
+ * - Variable scope
+ * - Parameters and return values
+ * - Animation triggers
+ * - Form validation
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // =============================================
+    // SECTION 1: SCOPE DEMONSTRATION
+    // =============================================
+    
+    // Global variable
+    const globalMessage = "This is a global variable";
+    
+    function demonstrateScope() {
+        // Local variable
+        const localMessage = "This is a local variable";
+        
+        // Function with block scope
+        if (true) {
+            const blockMessage = "This is block scoped";
+            console.log("Block scope access:", blockMessage);
+        }
+        
+        // Try to access block-scoped variable (will error)
+        try {
+            console.log(blockMessage);
+        } catch (e) {
+            console.log("Block scope error:", e.message);
+        }
+        
+        // Display scope information
+        document.getElementById('scope-output').innerHTML = `
+            <p><strong>Global:</strong> ${globalMessage}</p>
+            <p><strong>Local:</strong> ${localMessage}</p>
+            <p class="error">${e.message}</p>
+        `;
+    }
+    
+    document.getElementById('scope-btn').addEventListener('click', demonstrateScope);
+    
+    // =============================================
+    // SECTION 2: FORM VALIDATION
+    // =============================================
+    
+    const contactForm = document.getElementById('contact-form');
+    const successMessage = document.getElementById('form-success');
+    
+    /**
+     * Validates a form field
+     * @param {string} value - The input value
+     * @param {string} fieldName - The name of the field
+     * @param {number} [minLength=2] - Minimum required length
+     * @returns {string|null} Error message or null if valid
+     */
+    function validateField(value, fieldName, minLength = 2) {
+        if (!value.trim()) {
+            return ${fieldName} is required;
+        }
+        if (value.trim().length < minLength) {
+            return ${fieldName} must be at least ${minLength} characters;
+        }
+        return null;
+    }
+    
+    /**
+     * Validates an email address
+     * @param {string} email - The email to validate
+     * @returns {string|null} Error message or null if valid
+     */
+    function validateEmail(email) {
+        const error = validateField(email, "Email");
+        if (error) return error;
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return "Please enter a valid email address";
+        }
+        return null;
+    }
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // Validate fields
+        const nameError = validateField(name, "Name", 3);
+        const emailError = validateEmail(email);
+        const messageError = validateField(message, "Message", 10);
+        
+        // Display errors
+        document.getElementById('name-error').textContent = nameError || '';
+        document.getElementById('email-error').textContent = emailError || '';
+        document.getElementById('message-error').textContent = messageError || '';
+        
+        // If no errors, show success
+        if (!nameError && !emailError && !messageError) {
+            contactForm.reset();
+            contactForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+                contactForm.classList.remove('hidden');
+            }, 3000);
+        }
+    });
+    
+    // =============================================
+    // SECTION 3: ANIMATION CONTROLS
+    // =============================================
+    
+    const animationBox = document.getElementById('animated-box');
+    let currentAnimation = null;
+    
+    /**
+     * Applies an animation to the box
+     * @param {string} animationClass - The animation class to apply
+     */
+    function applyAnimation(animationClass) {
+        // Remove all animation classes first
+        animationBox.classList.remove(
+            'bounce-effect', 
+            'pulse-effect', 
+            'color-shift-effect'
+        );
+        
+        // Apply new animation if different from current
+        if (currentAnimation !== animationClass) {
+            animationBox.classList.add(animationClass);
+            currentAnimation = animationClass;
+        } else {
+            currentAnimation = null;
+        }
+    }
+    
+    // Animation button event listeners
+    document.getElementById('bounce-btn').addEventListener('click', function() {
+        applyAnimation('bounce-effect');
+    });
+    
+    document.getElementById('pulse-btn').addEventListener('click', function() {
+        applyAnimation('pulse-effect');
+    });
+    
+    document.getElementById('color-btn').addEventListener('click', function() {
+        applyAnimation('color-shift-effect');
+    });
+});

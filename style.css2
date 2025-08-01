@@ -1,0 +1,251 @@
+/* Modern Color Scheme */
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4cc9f0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4bb543;
+    --error: #ff3333;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f7fa;
+    color: var(--dark);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-out;
+}
+
+.header h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    color: var(--secondary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+    min-height: 20px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Animation Box */
+.animation-box {
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary);
+    margin: 20px auto;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+}
+
+.animation-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Animation Classes */
+.bounce-effect {
+    animation: bounce 0.8s infinite alternate;
+}
+
+.pulse-effect {
+    animation: pulse 1.5s infinite;
+}
+
+.color-shift-effect {
+    animation: colorShift 4s infinite;
+}
+
+/* Success Message */
+#form-success {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgba(75, 181, 67, 0.1);
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+#form-success h3 {
+    color: var(--success);
+    margin: 15px 0 5px;
+}
+
+.success-animation {
+    font-size: 3rem;
+    color: var(--success);
+    animation: zoomIn 0.5s ease-out;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes colorShift {
+    0% { background-color: var(--primary); }
+    33% { background-color: var(--accent); }
+    66% { background-color: var(--secondary); }
+    100% { background-color: var(--primary); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .animation-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
